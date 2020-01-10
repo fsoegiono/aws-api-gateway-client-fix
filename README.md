@@ -1,3 +1,8 @@
+[![dependencies Status](https://david-dm.org/kndt84/aws-api-gateway-client/status.svg)](https://david-dm.org/kndt84/aws-api-gateway-client)
+[![Build Status](https://travis-ci.org/kndt84/aws-api-gateway-client.svg?branch=master)](https://travis-ci.org/kndt84/aws-api-gateway-client)
+[![npm](https://img.shields.io/npm/dm/aws-api-gateway-client.svg)](https://www.npmjs.com/package/aws-api-gateway-client)
+
+
 # Overview
 A module for AWS API gateway client based on auto-generated JavaScript SDK. This module can be used not only for Node.js but for front-end. In addition, it generalizes original SDK's endpoint specific methods.
 
@@ -9,14 +14,14 @@ For the JavaScript SDK to work your APIs need to support CORS. The Amazon API Ga
 
 # Install
 ```
-npm install aws-api-gateway-client-fix
+npm install aws-api-gateway-client
 ```
 
 # Use the SDK in your project
 
 Require module
 ```
-var apigClientFactory = require('aws-api-gateway-client-fix').default;
+var apigClientFactory = require('aws-api-gateway-client').default;
 ```
 
 Set invokeUrl to config and create a client. For authorization, additional information is required as explained below.
@@ -29,7 +34,7 @@ Calls to an API take the form outlined below. Each API call returns a promise, t
 
 ```
 var pathParams = {
-    //This is where path request params go.
+    //This is where path request params go. 
     userId: '1234',
 };
 // Template syntax follows url-template https://www.npmjs.com/package/url-template
@@ -64,24 +69,24 @@ To initialize the SDK with AWS Credentials use the code below. Note, if you use 
 ```
 var apigClient = apigClientFactory.newClient({
     invokeUrl:'https://xxxxx.execute-api.us-east-1.amazonaws.com', // REQUIRED
-
+    
     region: 'eu-west-1',                                           // REQUIRED: The region where the API is deployed.
-
+    
     accessKey: 'ACCESS_KEY',                                       // REQUIRED
-
+    
     secretKey: 'SECRET_KEY',                                       // REQUIRED
 
     sessionToken: 'SESSION_TOKEN',                                 // OPTIONAL: If you are using temporary credentials
                                                                                 you must include the session token.
-
+    
     systemClockOffset: 0,                                          // OPTIONAL: An offset value in milliseconds to apply to signing time
-
+    
     retries: 4,                                                    // OPTIONAL: Number of times to retry before failing. Uses axios-retry plugin.
-
+    
     retryCondition: (err) => {                                     // OPTIONAL: Callback to further control if request should be retried.
       return err.response && err.response.status === 500;          //           Uses axios-retry plugin.
     },
-
+    
     retryDelay: 100 || 'exponential' || (retryCount, error) => {   // OPTIONAL: Define delay (in ms) as a number, a callback, or
       return retryCount * 100                                      //           'exponential' to use the in-built exponential backoff
     }                                                              //           function. Uses axios-retry plugin. Default is no delay.
